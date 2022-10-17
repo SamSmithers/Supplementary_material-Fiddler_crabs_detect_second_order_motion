@@ -1,5 +1,3 @@
-# Supplementary_material-Fiddler_crabs_detect_second_order_motion
-
 Code and data for the paper:
 
 *Fiddler crabs detect second-order motion in both intensity and polarization* (in prep 2022) 
