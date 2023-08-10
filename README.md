@@ -19,6 +19,9 @@
 -	Movies 17-21: Example recordings and motion traces for no response
 -	Movies 22-26: Example recordings and motion traces for a rejection
 
+## Viewing the supplementray movies
+To view the supplementary movies click on the movie and on the next page click "View raw" to download the movie to your device. The movies can be viewed using any device/program capable of playing .mp4 files.  
+
 ## Statistical analysis & plotting (R)
 ### Requirements & dependencies
 - R version >= 4
