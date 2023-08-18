@@ -3,7 +3,7 @@
 # analysis conducted, please refer to the statistical analysis section of the methods in the main manuscript.
 
 # Script written by Dr Samuel P. Smithers, Northeastern University, 2022
-# Last edited July 2023
+# Last edited August 2023
 
 # Corresponding authors SPS (s.smithers@northeastern.edu) and NWR (nicholas.roberts@bristol.ac.uk)
 
@@ -148,6 +148,11 @@ contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = TRUE) # A continuity correction (correct = TRUE) is applied if any of the counts are <5.
 #McNemar's chi-squared = 19.531, df = 1, p-value = 9.897e-06
 
+#Use the contingency table to calculate odds ratio. 
+# Considering a 2 x 2 table, with a and d being the concordant cells and b and c being the discordant cells, the odds ratio is simply the greater of (b/c) or (c/b) (https://rcompanion.org/handbook/H_05.html)
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3])) 
+# OR = 9.666667
+
 ### Control vs mean grey ###
 pairwiseData <- subset(I_data, Stimulus == "Control" | Stimulus == 'Mean grey')
 pairwiseData <- pairwiseData %>% group_by(CrabID) %>% filter(n()>1) 
@@ -163,6 +168,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = TRUE)
 #McNemar's chi-squared = 15.613, df = 1, p-value = 7.772e-05
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 6.75
 
 #Control vs flicker stim
 pairwiseData <- subset(I_data, Stimulus == "Control" | Stimulus == 'Second-order flicker stimulus')
@@ -179,6 +186,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = TRUE)
 #McNemar's chi-squared = 31.61, df = 1, p-value = 1.885e-08
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 19.5
 
 #Control vs flicker control
 pairwiseData <- subset(I_data, Stimulus == "Control" | Stimulus == 'Flicker control')
@@ -195,6 +204,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = TRUE)
 # McNemar's chi-squared = 9.3333, df = 1, p-value = 0.00225
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 6
 
 #First order vs mean grey
 pairwiseData <- subset(I_data, Stimulus == "First-order stimulus" | Stimulus == 'Mean grey')
@@ -211,6 +222,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = FALSE)
 #McNemar's chi-squared = 0.36, df = 1, p-value = 0.5485 WITHOUT continuity correction (since none of the counts are below 5)
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 1.272727
 
 #First order vs flicker stim
 pairwiseData <- subset(I_data, Stimulus == "First-order stimulus" | Stimulus == 'Second-order flicker stimulus')
@@ -227,6 +240,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = TRUE)
 #McNemar's chi-squared = 4.5, df = 1, p-value = 0.03389
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 3.5
 
 #First order vs flicker control
 pairwiseData <- subset(I_data, Stimulus == "First-order stimulus" | Stimulus == 'Flicker control')
@@ -243,6 +258,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = FALSE)
 #McNemar's chi-squared = 5.2609, df = 1, p-value = 0.02181 WITHOUT continuity correction (since none of the counts are below 5)
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 2.833333
 
 #mean grey vs flicker stim
 pairwiseData <- subset(I_data, Stimulus == "Mean grey" | Stimulus == 'Second-order flicker stimulus')
@@ -259,6 +276,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = TRUE)
 #McNemar's chi-squared = 6.8571, df = 1, p-value = 0.008829
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 4.25
 
 #mean grey vs flicker control
 pairwiseData <- subset(I_data, Stimulus == "Mean grey" | Stimulus == 'Flicker control')
@@ -275,6 +294,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = FALSE)
 # McNemar's chi-squared = 2.6667, df = 1, p-value = 0.1025 WITHOUT continuity correction (since none of the counts are below 5)
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 2
 
 #flicker stim vs flicker control
 pairwiseData <- subset(I_data, Stimulus == "Second-order flicker stimulus" | Stimulus == 'Flicker control')
@@ -291,6 +312,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = TRUE)
 # McNemar's chi-squared = 15.75, df = 1, p-value = 7.229e-05
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 8.333333
 
 ##### INTESNITY: APPLY BONFERRONI CORRECTION TO P VALUES FROM PAIRWISE MCNEMAR'S TESTS ####
 # List all of the p-values
@@ -401,6 +424,11 @@ contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = TRUE) # A continuity correction (correct = TRUE) is applied if any of the counts are <5.
 #McNemar's chi-squared = 25.037, df = 1, p-value = 5.624e-07
 
+#Use the contingency table to calculate odds ratio. 
+# Considering a 2 x 2 table, with a and d being the concordant cells and b and c being the discordant cells, the odds ratio is simply the greater of (b/c) or (c/b) (https://rcompanion.org/handbook/H_05.html)
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3])) 
+# OR = Inf
+
 #Control vs mean grey'
 pairwiseData <- subset(P_data, Stimulus == "Control" | Stimulus == 'Mean grey')
 pairwiseData <- pairwiseData %>% group_by(CrabID) %>% filter(n()>1) 
@@ -416,6 +444,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = TRUE)
 #McNemar's chi-squared = 4.3478, df = 1, p-value = 0.03706
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 2.833333
 
 #Control vs flicker stim
 pairwiseData <- subset(P_data, Stimulus == "Control" | Stimulus == 'Second-order flicker stimulus')
@@ -432,6 +462,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = TRUE)
 #McNemar's chi-squared = 16, df = 1, p-value = 6.334e-05
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 11.5
 
 #Control vs flicker control
 pairwiseData <- subset(P_data, Stimulus == "Control" | Stimulus == 'Flicker control')
@@ -448,6 +480,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = TRUE)
 #McNemar's chi-squared = 0.083333, df = 1, p-value = 0.7728
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 1.4
 
 #First order vs mean grey
 pairwiseData <- subset(P_data, Stimulus == "First-order stimulus" | Stimulus == 'Mean grey')
@@ -464,6 +498,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = FALSE)
 #McNemar's chi-squared = 8, df = 1, p-value = 0.004678 WITHOUT continuity correction (since none of the counts are below 5)
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 3
 
 #First order vs flicker stim
 pairwiseData <- subset(P_data, Stimulus == "First-order stimulus" | Stimulus == 'Second-order flicker stimulus')
@@ -480,6 +516,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = FALSE)
 #McNemar's chi-squared = 1.6364, df = 1, p-value = 0.2008 WITHOUT continuity correction (since none of the counts are below 5)
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 1.75
 
 #First order vs flicker control
 pairwiseData <- subset(P_data, Stimulus == "First-order stimulus" | Stimulus == 'Flicker control')
@@ -496,6 +534,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = TRUE)
 #McNemar's chi-squared = 17.455, df = 1, p-value = 2.943e-05
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 7.25
 
 #mean grey vs flicker stim
 pairwiseData <- subset(P_data, Stimulus == "Mean grey" | Stimulus == 'Second-order flicker stimulus')
@@ -512,6 +552,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = FALSE)
 #McNemar's chi-squared = 3.125, df = 1, p-value = 0.0771 WITHOUT continuity correction (since none of the counts are below 5)
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 1.909091
 
 #mean grey vs flicker control
 pairwiseData <- subset(P_data, Stimulus == "Mean grey" | Stimulus == 'Flicker control')
@@ -528,6 +570,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = TRUE)
 #McNemar's chi-squared = 3.3684, df = 1, p-value = 0.06646
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 2.8
 
 #flicker stim vs flicker control
 pairwiseData <- subset(P_data, Stimulus == "Second-order flicker stimulus" | Stimulus == 'Flicker control')
@@ -544,6 +588,8 @@ contingencyTable <- table(ResponseTable)
 contingencyTable
 mcnemar.test(contingencyTable, y = NULL, correct = TRUE)
 #McNemar's chi-squared = 12, df = 1, p-value = 0.000532
+max((contingencyTable[3]/contingencyTable[2]), (contingencyTable[2]/contingencyTable[3]))
+# OR = 5.75
 
 ##### POLARIZATION APPLY BONFERRONI CORRECTION TO P VALUES FROM PAIRWISE MCNEMAR'S TESTS ####
 #List all of the p-values
